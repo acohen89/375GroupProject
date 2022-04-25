@@ -7,10 +7,13 @@ using namespace std;
 template <typename T> class BST{
     private: 
         int arr[];
+        int size; 
     public: 
-        BST(); 
+        BST(int); 
         void insert(T);
-        T findValue(T);
+        void insertRecursively(T);
+        T search(T);
+        T searchRecursively(T);
         T findInRange(T min, T low); 
 };
 
