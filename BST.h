@@ -73,7 +73,24 @@ class BST {
 
             if (target.right != nullptr) //Explore the right child of TARGET
             {
-                printInOrder(target.right) //Recursive call on right child
+                printInOrder(target.right); //Recursive call on right child
+            }
+        }
+
+        void preorderPrint(Node target)
+        {
+            cout << target.data << endl; //Print value of current TARGET
+
+            //Explore left subtree
+            if (target.left != nullptr)
+            {
+                preorderPrint(target.left); //Recursive call on left child
+            }
+
+            //Explore right subtree
+            if (target.right != nullptr)
+            {
+                preorderPrint(target.right); //Recursive call on right child
             }
         }
 
