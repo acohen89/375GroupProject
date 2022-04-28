@@ -1,6 +1,8 @@
 #ifndef BST_H
 #define BST_H
 
+#include <iostream>
+
 #include "Node.h"
 
 template <typename T>
@@ -15,6 +17,20 @@ class BST {
                     data = value; 
                     left = nullptr;
                     right = nullptr; 
+                }
+                Node(){
+                    data = NULL; 
+                    left = nullptr;
+                    right = nullptr;
+                }
+                void printInOrder(){
+                    cout << data << " ";
+                    if(left != nullptr){
+                        left->print();
+                    }
+                    if(right != nullptr){
+                        right->print();
+                    }
                 }
                 void insert(T value){
                     Node* curLeft = left; 
@@ -63,8 +79,8 @@ class BST {
         }
         void insert(T val){
             size++; 
-            if(root == nullptr){
-                *root = val;
+            if(size == 1){
+                root = new Node(val); 
                 return; 
             }
             Node *temp = root; 
@@ -79,7 +95,7 @@ class BST {
 
                 } else{ //* go to the left 
                     if(temp->left == nullptr){
-                        temp->left = mew Node(val); 
+                        temp->left = new Node(val); 
                         return;
                     } else {
                         temp = temp->left; 
@@ -88,6 +104,11 @@ class BST {
             }
         }
 
+        void printInOrder()
+        {
+            root->printInOrder();
+        }
+        
         void printInOrder(Node target)
         {
             if (target->left != nullptr) //Explore the left child of TARGET
@@ -128,11 +149,13 @@ class BST {
             }
             if (target.right != nullptr)
             {
-                postorderPrint(target.right)
+                postorderPrint(target.right);
             }
             cout << target.data << endl;
         }
-
+        Node getRoot(){
+            return *root;
+        }
     private:
         int size;
         Node *root; 

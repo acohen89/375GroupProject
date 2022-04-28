@@ -7,11 +7,13 @@ using namespace std;
 
 int main(int argc, char *argv[]){
     string line;
+    BST<int> bst; 
     ifstream file(argv[1]);
      if (file.is_open()){
         while(getline(file, line)){
-            cout << line << endl; 
+            bst.insert(stoi(line));
         }
      }
      file.close();
+     bst.printInOrder();
 }
