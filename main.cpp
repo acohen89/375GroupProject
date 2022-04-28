@@ -8,12 +8,15 @@ using namespace std;
 int main(int argc, char *argv[]){
     string line;
     BST<int> bst; 
+    BST<int> bstR; 
     ifstream file(argv[1]);
      if (file.is_open()){
         while(getline(file, line)){
             bst.insert(stoi(line));
+            bstR.insertRecursively(stoi(line));
         }
      }
      file.close();
-     bst.printInOrder();
+     bst.print();
+     bstR.print();
 }

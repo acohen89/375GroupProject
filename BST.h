@@ -23,7 +23,7 @@ class BST {
                     left = nullptr;
                     right = nullptr;
                 }
-                void printInOrder(){
+                void print(){
                     cout << data << " ";
                     if(left != nullptr){
                         left->print();
@@ -32,50 +32,10 @@ class BST {
                         right->print();
                     }
                 }
-                void insert(T value){
-                    Node* curLeft = left; 
-                    Node* curRight = right;
-                    while(true){
-                        if(value > data){  //*insert to right 
-                            if(curRight == nullptr){
-                                curRight = new Node(value); 
-                                break;
-                            } else {
-                                curLeft = &curRight->left;
-                                curRight = &curRight->right; 
-                            }
-                        } else { //* insert ot left 
-                            if(curLeft == nullptr){
-                                curLeft = new Node(value); 
-                                break;
-                            } else {
-                                curLeft = &curLeft->left;
-                                curRight = &curLeft->right;
-                            }
-                        }
-            }
-                }
-                void insertRecursively(Node* root, T value){
-                    if(root == nullptr){
-                        root = new Node(value); 
-                        return;
-                    } else {
-                        if(value > root->data){ //* insert to the right 
-                            insertRecursively(root->right, value); 
-                        } else { //* insert to the left
-                            insertRecursively(root->left, value); 
-                        }
-                    }
-                }
-                T search(T);
-                T searchRecursively(T, int search = 0);
-                T findInRange(T min, T low); 
+        
         };
         BST(){
             size = 0; 
-        }
-        void insertRecursively(T val){
-
         }
         void insert(T val){
             size++; 
@@ -104,9 +64,9 @@ class BST {
             }
         }
 
-        void printInOrder()
+        void print()
         {
-            root->printInOrder();
+            root->print();
         }
         
         void printInOrder(Node target)
@@ -155,6 +115,31 @@ class BST {
         }
         Node getRoot(){
             return *root;
+        }
+        void insertRecursively(T val){
+            if(size == 0){
+                size++;
+                root = new Node(val); 
+                return;
+            }
+            insertRecursively(root, val); 
+        }
+        void insertRecursively(Node *root, T val){
+            if(val >= root->data){ //* right side
+                if(root->right == nullptr){
+                    root->right = new Node(val);
+                    size++;
+                    return;
+                }
+                insertRecursively(root->right, val); 
+            } else {
+                if(root->left == nullptr){
+                    root->left = new Node(val);
+                    size++;
+                    return;
+                }
+                insertRecursively(root->left, val); 
+            }
         }
     private:
         int size;
