@@ -86,7 +86,53 @@ class BST {
                     }
                 }
             }
-        }  
+        }
+
+        void printInOrder(Node target)
+        {
+            if (target->left != nullptr) //Explore the left child of TARGET
+            {
+                printInOrder(target.left); //Recursive call on left child
+            }
+
+            cout << target.data << endl; //Print the data in TARGET
+
+            if (target.right != nullptr) //Explore the right child of TARGET
+            {
+                printInOrder(target.right); //Recursive call on right child
+            }
+        }
+
+        void preorderPrint(Node target)
+        {
+            cout << target.data << endl; //Print value of current TARGET
+
+            //Explore left subtree
+            if (target.left != nullptr)
+            {
+                preorderPrint(target.left); //Recursive call on left child
+            }
+
+            //Explore right subtree
+            if (target.right != nullptr)
+            {
+                preorderPrint(target.right); //Recursive call on right child
+            }
+        }
+
+        void postorderPrint(Node target)
+        {
+            if (target.left != nullptr)
+            {
+                postorderPrint(target.left);
+            }
+            if (target.right != nullptr)
+            {
+                postorderPrint(target.right)
+            }
+            cout << target.data << endl;
+        }
+
     private:
         int size;
         Node *root; 
