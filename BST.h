@@ -55,18 +55,41 @@ class BST {
                 T searchRecursively(T, int search = 0);
                 T findInRange(T min, T low); 
         };
-        BST();
-        void insert(T val ){
+        BST(){
+            size = 0; 
+        }
+        void insertRecursively(T val){
+
+        }
+        void insert(T val){
+            size++; 
             if(root == nullptr){
                 *root = val;
+                return; 
+            }
+            Node *temp = root; 
+            while(temp != nullptr){
+                if(val >= temp->data){ //* go to right of temp
+                    if(temp->right == nullptr){
+                        temp->right = new Node(val); 
+                        return; 
+                    } else {
+                        temp = temp->right; 
+                    }
+
+                } else{ //* go to the left 
+                    if(temp->left == nullptr){
+                        temp->left = mew Node(val); 
+                        return;
+                    } else {
+                        temp = temp->left; 
+                    }
+                }
             }
         }  
     private:
         int size;
         Node *root; 
-        Node *left;
-        Node *right; 
-
 };
 
 
