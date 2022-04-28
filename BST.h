@@ -94,6 +94,19 @@ class BST {
             }
         }
 
+        void postorderPrint(Node target)
+        {
+            if (target.left != nullptr)
+            {
+                postorderPrint(target.left);
+            }
+            if (target.right != nullptr)
+            {
+                postorderPrint(target.right)
+            }
+            cout << target.data << endl;
+        }
+
     private:
         int size;
         Node *root;
