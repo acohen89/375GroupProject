@@ -2,6 +2,9 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 
+#include "Node.h"
+#include "BST.h"
+
 int main(int argc, char *argv[]){
     string line;
     ifstream file(argv[1]);
