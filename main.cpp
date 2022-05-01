@@ -17,6 +17,7 @@ int main(int argc, char *argv[]){
         }
      }
      file.close();
-     bst.print();
-     bstR.print();
+     bst.print();   
+    //  cout << bst.findRecursively(27);
+    //  bstR.print();
 }

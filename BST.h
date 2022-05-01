@@ -37,6 +37,57 @@ class BST {
         BST(){
             size = 0; 
         }
+        bool findRecursively(T val){
+            return findRecursively(root, val); 
+        }
+        bool findRecursively(Node* root, T val){
+            if(root->data == val) return true;
+            if(val > root->data){ 
+                if(root->right == nullptr){
+                    return false; 
+                } else {
+                    findRecursively(root->right, val); 
+                }
+            } else{
+                if(root->left == nullptr){
+                    return false; 
+                } else {
+                    findRecursively(root->left, val); 
+                }
+
+            }
+        }
+        void findInRange(T low, T high){
+            findInRange(root, low, high);
+            cout << endl; 
+        }
+        void findInRange(Node *root, T low, T high){
+            if(root == nullptr) return;
+            if(root->data >= low && root->data <= high){
+                cout << root->data << " "; 
+                findInRange(root->left, low, high);
+                findInRange(root->right, low, high);
+            } else if(root->data < low){
+                findInRange(root->right, low, high);
+            } else {
+                findInRange(root->left, low, high);
+            }
+
+        }
+        bool find(T val){
+            Node *temp = root; 
+            while(true){
+                if(val == temp->data) return true;
+                if(temp->right == nullptr && temp->left == nullptr) return false; 
+                if(val > temp->data){
+                    if(temp->right == nullptr) return false;
+                    temp = temp->right; 
+                } else {
+                    if(temp->left == nullptr) return false;
+                    temp = temp->left; 
+                }
+            }
+        }
         void insert(T val){
             size++; 
             if(size == 1){
