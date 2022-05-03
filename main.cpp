@@ -1,7 +1,13 @@
 using namespace std; 
 #include <iostream>
 #include <fstream>
-
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <array>
+#include "item.h"
 #include "Node.h"
 #include "BST.h"
 
