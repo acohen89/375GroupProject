@@ -2,6 +2,7 @@
 #define BST_H
 
 #include "Node.h"
+#include <iostream>
 
 template <typename T>
 class BST {
@@ -79,7 +80,7 @@ class BST {
 
                 } else{ //* go to the left 
                     if(temp->left == nullptr){
-                        temp->left = mew Node(val); 
+                        temp->left = new Node(val); 
                         return;
                     } else {
                         temp = temp->left; 
@@ -128,7 +129,7 @@ class BST {
             }
             if (target.right != nullptr)
             {
-                postorderPrint(target.right)
+                postorderPrint(target.right);
             }
             cout << target.data << endl;
         }
