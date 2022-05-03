@@ -44,12 +44,10 @@ int main(int argc, char *argv[]){
     recursiveNow = recursiveNow * 1000;
     for (int index = 0; index < itemCount; index++)
     {
-        bstR.insertRecursively(stoi(line));
+        bstR.insertRecursively(items[index]);
     }
 
-    //NOTE: Add any BST operations between HERE
-
-    //AND HERE for them to be counted in the runtime
+    //NOTE: Add any BST operations below this line
 
     time_t later = time(nullptr); //Init later variable
     iterativeNow = iterativeNow - later;
