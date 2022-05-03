@@ -27,14 +27,14 @@ int main(int argc, char *argv[]){
             time_t later = time(nullptr); //Init later variable
             later = later * 1000; //Convert to milliseconds
             now = later - now; //Get the difference between the times
-            cout << now << endl; //Print the difference
+            cout << "Iterative Runtime: " << now << endl; //Print the difference
 
             now = time(nullptr); //Reset the time varaible
             bstR.insertRecursively(stoi(line));
             later = time(nullptr);
 
             now = later - now;
-            cout << now << endl; //Output the difference
+            cout << "Recursive Runtime: " << now << endl; //Output the difference
         }
     }
     file.close();
