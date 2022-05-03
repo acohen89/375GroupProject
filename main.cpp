@@ -6,6 +6,7 @@ using namespace std;
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <time.h>
 #include <array>
 #include "item.h"
 #include "Node.h"
