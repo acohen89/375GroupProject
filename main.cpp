@@ -11,34 +11,76 @@ using namespace std;
 #include "Node.h"
 #include "BST.h"
 
+int countValues(string basicString);
+
 int main(int argc, char *argv[]){
     string line;
+    string filename = argv[1];
     BST<int> bst; 
     BST<int> bstR; 
-    ifstream file(argv[1]);
-    if (file.is_open()){
-        while(getline(file, line))
-        {
-            time_t now = time(nullptr); //Init time variable
-            time_t milliTime = now * 1000; //Convert to milliseconds
+    ifstream file(filename);
 
-            bst.insert(stoi(line));
+    int index = 0;
+    int itemCount = countValues(filename);
+    int items [itemCount];
 
-            time_t later = time(nullptr); //Init later variable
-            later = later * 1000; //Convert to milliseconds
-            now = later - now; //Get the difference between the times
-            cout << "Iterative Runtime: " << now << endl; //Print the difference
-
-            now = time(nullptr); //Reset the time varaible
-            bstR.insertRecursively(stoi(line));
-            later = time(nullptr);
-
-            now = later - now;
-            cout << "Recursive Runtime: " << now << endl; //Output the difference
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            items[index] = stoi(line);
+            index++;
         }
     }
+
     file.close();
+
+    time_t iterativeNow = time(nullptr); //Init time variable
+    iterativeNow = iterativeNow * 1000; //Convert to milliseconds
+    for (int index = 0; index < itemCount; index++)
+    {
+        bst.insert(items[index]);
+    }
+
+    time_t recursiveNow = time(nullptr);
+    recursiveNow = recursiveNow * 1000;
+    for (int index = 0; index < itemCount; index++)
+    {
+        bstR.insertRecursively(stoi(line));
+    }
+
+    //NOTE: Add any BST operations between HERE
+
+    //AND HERE for them to be counted in the runtime
+
+    time_t later = time(nullptr); //Init later variable
+    iterativeNow = iterativeNow - later;
+    recursiveNow = recursiveNow - later;
+
+    cout << "Iterative Runtime: " << iterativeNow << endl;
+    cout << "Recursive Runtime: " << recursiveNow << endl;
+
     bst.print();
     //  cout << bst.findRecursively(27);
     //  bstR.print();
+}
+
+/**
+ * Counts the number of input lines in a file
+ * @param filename the name of the file
+ * @return the number of lines in the file
+ */
+int countValues(string filename)
+{
+    int itemCount = 0;
+    ifstream file(filename);
+
+    if (file.is_open())
+    {
+        string line;
+        while(getline(file, line))
+        {
+            itemCount++;
+        }
+    }
+
+    return itemCount;
 }
