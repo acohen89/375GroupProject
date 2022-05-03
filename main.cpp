@@ -18,8 +18,10 @@ int main(int argc, char *argv[]){
     ifstream file(argv[1]);
      if (file.is_open()){
         while(getline(file, line)){
-            bst.insert(stoi(line));
-            bstR.insertRecursively(stoi(line));
+            Item n(line); 
+            // cout << n.getAVG() << endl; 
+            // bst.insert();
+            // bstR.insertRecursively();
         }
      }
      file.close();

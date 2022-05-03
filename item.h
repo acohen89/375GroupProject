@@ -1,47 +1,29 @@
+#ifndef ITEM_H
+#define ITEM_H
+
 #include <stdlib.h>
 #include <iostream>
 #include <string>
 #include <vector> 
+#include <sstream>
 
 using namespace std;
 
-
-template<class T>
 class Item {
     private:
         // array
-        vector<T> object;
+        vector<int> vals; 
         int size;
-        int sortVal;
-
-
 
     public:
-
-        Item(){
-        }
-
-/*
-        Item(vector<T> obj){
-            object = obj;
-        }
-*/
-        void setVector(T tmp){
-            object.push_back(tmp);
-        }
-
-       // void printItem();
-
-
-
-
-
-
-
-
-
-
-
-
-
+        Item(){}
+        void print(); 
+        // const double getAVG(); 
+        Item(string);
+        friend bool operator<(const Item& i2, const Item& i); 
+        friend bool operator<=(const Item& i2, const Item& i); 
+        friend bool operator>=(const Item& i2, const Item& i); 
+        friend bool operator>(const Item& i2, const Item& i); 
 };
+
+#endif
