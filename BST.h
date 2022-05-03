@@ -1,6 +1,8 @@
 #ifndef BST_H
 #define BST_H
 
+#include <iostream>
+
 #include "Node.h"
 #include <iostream>
 
@@ -17,55 +19,80 @@ class BST {
                     left = nullptr;
                     right = nullptr; 
                 }
-                void insert(T value){
-                    Node* curLeft = left; 
-                    Node* curRight = right;
-                    while(true){
-                        if(value > data){  //*insert to right 
-                            if(curRight == nullptr){
-                                curRight = new Node(value); 
-                                break;
-                            } else {
-                                curLeft = &curRight->left;
-                                curRight = &curRight->right; 
-                            }
-                        } else { //* insert ot left 
-                            if(curLeft == nullptr){
-                                curLeft = new Node(value); 
-                                break;
-                            } else {
-                                curLeft = &curLeft->left;
-                                curRight = &curLeft->right;
-                            }
-                        }
-            }
+                Node(){
+                    data = NULL; 
+                    left = nullptr;
+                    right = nullptr;
                 }
-                void insertRecursively(Node* root, T value){
-                    if(root == nullptr){
-                        root = new Node(value); 
-                        return;
-                    } else {
-                        if(value > root->data){ //* insert to the right 
-                            insertRecursively(root->right, value); 
-                        } else { //* insert to the left
-                            insertRecursively(root->left, value); 
-                        }
+                void print(){
+                    cout << data << " ";
+                    if(left != nullptr){
+                        left->print();
+                    }
+                    if(right != nullptr){
+                        right->print();
                     }
                 }
-                T search(T);
-                T searchRecursively(T, int search = 0);
-                T findInRange(T min, T low); 
+        
         };
         BST(){
             size = 0; 
         }
-        void insertRecursively(T val){
+        bool findRecursively(T val){
+            return findRecursively(root, val); 
+        }
+        bool findRecursively(Node* root, T val){
+            if(root->data == val) return true;
+            if(val > root->data){ 
+                if(root->right == nullptr){
+                    return false; 
+                } else {
+                    findRecursively(root->right, val); 
+                }
+            } else{
+                if(root->left == nullptr){
+                    return false; 
+                } else {
+                    findRecursively(root->left, val); 
+                }
 
+            }
+        }
+        void findInRange(T low, T high){
+            findInRange(root, low, high);
+            cout << endl; 
+        }
+        void findInRange(Node *root, T low, T high){
+            if(root == nullptr) return;
+            if(root->data >= low && root->data <= high){
+                cout << root->data << " "; 
+                findInRange(root->left, low, high);
+                findInRange(root->right, low, high);
+            } else if(root->data < low){
+                findInRange(root->right, low, high);
+            } else {
+                findInRange(root->left, low, high);
+            }
+
+        }
+        bool find(T val){
+            Node *temp = root; 
+            while(true){
+                if(val == temp->data) return true;
+                if(temp->right == nullptr && temp->left == nullptr) return false; 
+                if(val > temp->data){
+                    if(temp->right == nullptr) return false;
+                    temp = temp->right; 
+                } else {
+                    if(temp->left == nullptr) return false;
+                    temp = temp->left; 
+                }
+            }
         }
         void insert(T val){
             size++; 
-            if(root == nullptr){
-                *root = val;
+            if(size == 1){
+                root = new Node(val); 
                 return; 
             }
             Node *temp = root; 
@@ -89,6 +116,11 @@ class BST {
             }
         }
 
+        void print()
+        {
+            root->print();
+        }
+        
         void printInOrder(Node target)
         {
             if (target->left != nullptr) //Explore the left child of TARGET
@@ -133,7 +165,34 @@ class BST {
             }
             cout << target.data << endl;
         }
-
+        Node getRoot(){
+            return *root;
+        }
+        void insertRecursively(T val){
+            if(size == 0){
+                size++;
+                root = new Node(val); 
+                return;
+            }
+            insertRecursively(root, val); 
+        }
+        void insertRecursively(Node *root, T val){
+            if(val >= root->data){ //* right side
+                if(root->right == nullptr){
+                    root->right = new Node(val);
+                    size++;
+                    return;
+                }
+                insertRecursively(root->right, val); 
+            } else {
+                if(root->left == nullptr){
+                    root->left = new Node(val);
+                    size++;
+                    return;
+                }
+                insertRecursively(root->left, val); 
+            }
+        }
     private:
         int size;
         Node *root; 
