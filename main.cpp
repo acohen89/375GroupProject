@@ -37,7 +37,6 @@ int main(int argc, char *argv[]){
     ifstream fileR(filenameR);
     if (file.is_open()) {
         while (getline(fileR, lineR)) {
-            // cout << lineR << endl; 
             bstR.insert(stoi(lineR)); 
         }
     }
