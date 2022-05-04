@@ -41,6 +41,11 @@ int main(int argc, char *argv[]){
         bst.insert(items[index]);
     }
 
+    //NOTE: Add any iterative BST operations below this line
+
+    time_t later = time(nullptr); //Init later variable
+    iterativeNow = iterativeNow - later;
+
     time_t recursiveNow = time(nullptr);
     recursiveNow = recursiveNow * 1000;
     for (int index = 0; index < itemCount; index++)
@@ -48,10 +53,8 @@ int main(int argc, char *argv[]){
         bstR.insertRecursively(items[index]);
     }
 
-    //NOTE: Add any BST operations below this line
+    //NOTE: Add any recursive BST operations below this line
 
-    time_t later = time(nullptr); //Init later variable
-    iterativeNow = iterativeNow - later;
     later = time(nullptr);
     recursiveNow = recursiveNow - later;
 
