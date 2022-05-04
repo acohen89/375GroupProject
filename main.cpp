@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
         }
     }
     auto stop = std::chrono::high_resolution_clock::now();
-    cout << "Iterative Time Taken: " << (double)std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() / 1000000 << " Seconds " << endl; 
+    cout << "Iterative Time Taken: " << (double)std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() / 1000 << " ms " << endl; 
 
     start = std::chrono::high_resolution_clock::now(); 
     string lineR;
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
         }
     }
     stop = std::chrono::high_resolution_clock::now();
-    cout << "Recursive Time Taken: " << (double)std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() / 1000000 << " Seconds " << endl; 
+    cout << "Recursive Time Taken: " << (double)std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() / 1000 << " ms " << endl; 
 
     srand (time(NULL)); 
     vector<int> randNums; 
@@ -59,14 +59,14 @@ int main(int argc, char *argv[]){
         bst.find(randNums.at(i));
     }
     stop = std::chrono::high_resolution_clock::now();
-    cout << "Time Taken: " << (double)std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() / 1000000 << " Seconds " << endl; 
+    cout << "Time Taken: " << (double)std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() / 1000 << " ms " << endl; 
     
     start = std::chrono::high_resolution_clock::now(); 
     for(int i = 0; i < NUM_RANDS; i++){
         bstR.findRecursively(randNums.at(i));
     }
     stop = std::chrono::high_resolution_clock::now();
-    cout << "Recursive Time Taken: " << (double)std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() / 1000000 << " Seconds " << endl; 
+    cout << "Recursive Time Taken: " << (double)std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() / 1000 << " ms " << endl; 
 }
 
 
