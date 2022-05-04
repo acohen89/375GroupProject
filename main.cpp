@@ -52,6 +52,7 @@ int main(int argc, char *argv[]){
 
     time_t later = time(nullptr); //Init later variable
     iterativeNow = iterativeNow - later;
+    later = time(nullptr);
     recursiveNow = recursiveNow - later;
 
     cout << "Iterative Runtime: " << iterativeNow << endl;
