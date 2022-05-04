@@ -3,6 +3,7 @@ using namespace std;
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <chrono>
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -21,50 +22,31 @@ int main(int argc, char *argv[]){
     BST<int> bstR; 
     ifstream file(filename);
 
-    int index = 0;
-    int itemCount = countValues(filename);
-    int items [itemCount];
-
+        auto start = std::chrono::high_resolution_clock::now(); 
     if (file.is_open()) {
         while (getline(file, line)) {
-            items[index] = stoi(line);
-            index++;
+            bst.insert(stoi(line)); 
         }
     }
+    auto stop = std::chrono::high_resolution_clock::now();
+    cout << "Iterative Time Taken: " << (double)std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() / 1000000 << " Seconds " << endl; 
 
-    file.close();
-
-    time_t iterativeNow = time(nullptr); //Init time variable
-    iterativeNow = iterativeNow * 1000; //Convert to milliseconds
-    for (int index = 0; index < itemCount; index++)
-    {
-        bst.insert(items[index]);
+    start = std::chrono::high_resolution_clock::now(); 
+    string lineR;
+    string filenameR = argv[1];
+    ifstream fileR(filenameR);
+    if (file.is_open()) {
+        while (getline(fileR, lineR)) {
+            // cout << lineR << endl; 
+            bstR.insert(stoi(lineR)); 
+        }
     }
-
-    time_t recursiveNow = time(nullptr);
-    recursiveNow = recursiveNow * 1000;
-    for (int index = 0; index < itemCount; index++)
-    {
-        bstR.insertRecursively(items[index]);
-    }
-
-    //NOTE: Add any BST operations below this line
-
-    time_t later = time(nullptr); //Init later variable
-    iterativeNow = iterativeNow - later;
-    later = time(nullptr);
-    recursiveNow = recursiveNow - later;
-
-    cout << "Iterative Runtime: " << iterativeNow << endl;
-    cout << "Recursive Runtime: " << recursiveNow << endl;
-
-    bst.print();
-    //  cout << bst.findRecursively(27);
-    //  bstR.print();
+    stop = std::chrono::high_resolution_clock::now();
+    cout << "Recursive Time Taken: " << (double)std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count() / 1000000 << " Seconds ";
 }
 
 /**
- * Counts the number of input lines in a file
+ * Counts the number of input line2s in a file
  * @param filename the name of the file
  * @return the number of lines in the file
  */
